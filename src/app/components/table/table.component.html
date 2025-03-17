@@ -1,0 +1,25 @@
+<div class="container">
+    <h2>Invoice List</h2>
+    
+    <table border="1">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Number</th>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let invoice of invoices">
+            <td>{{ invoice.id }}</td>
+            <td>{{ invoice.number }}</td>
+            <td>{{ invoice.date }}</td>
+            <td>{{ invoice.customer_name }}</td>
+            <td><a [routerLink]="['/invoice', invoice.id]">View Details</a></td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  
