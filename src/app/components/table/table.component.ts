@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { RouterModule, ActivatedRoute } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { InvoiceService } from '../../services/invoice.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { InvoiceService } from '../../services/invoice.service';
 export class TableComponent implements OnInit{
   invoices: any[] = [];
 
-  constructor(private invoiceService: InvoiceService, private route: ActivatedRoute) {}
+  constructor(private invoiceService: InvoiceService, private route: Router) {}
 
   
   ngOnInit() {
@@ -22,6 +22,10 @@ export class TableComponent implements OnInit{
       console.log("Invoices data:",response.data)
       this.invoices = response.data;
     });
+  }
+
+  viewDetail(id: number) {
+    this.route.navigate(['/detail', id]);
   }
   
 }

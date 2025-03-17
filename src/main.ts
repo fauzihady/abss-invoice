@@ -1,14 +1,14 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideRouter,Routes  } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
-import { TableComponent } from './app/components/table/table.component';
-import { DetailComponent } from './app/components/detail/detail.component';
+import { provideHttpClient } from '@angular/common/http'; // Import this!
+import { AppComponent } from './app/app.component';
+import { provideRouter } from '@angular/router';
+// import { appRoutes } from './app/app.routes';
+import { routes } from './app/app.routes';
 
-const routes: Routes = [
-  { path: '', component: TableComponent },
-  { path: 'second-component', component: DetailComponent }, // Ensure this exists
-];
-
-bootstrapApplication(TableComponent, {
-  providers: [provideHttpClient(), provideRouter(routes)] // ✅ Add routing provider
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(routes), // Use `routes` instead of `appRoutes`
+    provideHttpClient()
+  ]
 }).catch(err => console.error(err));
+
