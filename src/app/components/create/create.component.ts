@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class CreateComponent {
   invoice = { customer_name: '', number: '', date: new Date().toISOString().split('T')[0]};
+  errorMessage: string = '';
 
   constructor(private invoiceService: InvoiceService, private router: Router) {}
 
@@ -23,8 +24,11 @@ export class CreateComponent {
         this.router.navigate(['/']);
       },
       error: (error) => {
-        console.error('Error creating invoice:', error);
-        console.error('Error creating invoice: 2', this.invoice);
+        if (error.status === 422) { // Handle duplicate entry error
+          this.errorMessage = 'Invoice number is already in use. Please choose a different one.';
+        } else {
+          this.errorMessage = 'Something went wrong. Please try again.';
+        }
       }
     });
   }
