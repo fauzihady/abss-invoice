@@ -1,5 +1,8 @@
 <div class="container">
     <h2>Invoice List</h2>
+    <button type="submit" (click)="navigateToCreate()">
+      Create New
+    </button>
     
     <table border="1">
         <thead>
@@ -17,7 +20,10 @@
             <td>{{ invoice.number }}</td>
             <td>{{ invoice.date }}</td>
             <td>{{ invoice.customer_name }}</td>
-            <td><a [routerLink]="['/invoice', invoice.id]">View Details</a></td>
+            <td class="action">
+              <button type="action_view" (click)="viewDetail(invoice.id)">View</button>
+              <button type="action_delete" (click)="deleteInvoice(invoice.id)">Delete</button>
+            </td>
           </tr>
         </tbody>
       </table>

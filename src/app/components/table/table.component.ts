@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { RouterModule, ActivatedRoute } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { InvoiceService } from '../../services/invoice.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { InvoiceService } from '../../services/invoice.service';
 export class TableComponent implements OnInit{
   invoices: any[] = [];
 
-  constructor(private invoiceService: InvoiceService, private route: ActivatedRoute) {}
+  constructor(private invoiceService: InvoiceService, private route: Router) {}
 
   
   ngOnInit() {
@@ -23,5 +23,27 @@ export class TableComponent implements OnInit{
       this.invoices = response.data;
     });
   }
+
+  viewDetail(id: number) {
+    this.route.navigate(['/detail', id]);
+  }
   
+  deleteInvoice(id: number) {
+    if (confirm('Are you sure you want to delete this invoice?')) {
+      this.invoiceService.deleteInvoice(id).subscribe({
+        next: () => {
+          this.invoices = this.invoices.filter(invoice => invoice.id !== id);
+          console.log('Invoice deleted successfully');
+        },
+        error: (error) => {
+          console.error('Error deleting invoice:', error);
+        }
+      });
+    }
+  }
+
+  navigateToCreate() {
+    this.route.navigate(['/create']);
+  }
+
 }
