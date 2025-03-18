@@ -28,4 +28,22 @@ export class TableComponent implements OnInit{
     this.route.navigate(['/detail', id]);
   }
   
+  deleteInvoice(id: number) {
+    if (confirm('Are you sure you want to delete this invoice?')) {
+      this.invoiceService.deleteInvoice(id).subscribe({
+        next: () => {
+          this.invoices = this.invoices.filter(invoice => invoice.id !== id);
+          console.log('Invoice deleted successfully');
+        },
+        error: (error) => {
+          console.error('Error deleting invoice:', error);
+        }
+      });
+    }
+  }
+
+  navigateToCreate() {
+    this.route.navigate(['/create']);
+  }
+
 }

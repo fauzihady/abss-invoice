@@ -1,0 +1,15 @@
+<h2>Create Invoice</h2>
+<form (ngSubmit)="createInvoice()">
+<div>
+    <label>Customer Name:</label>
+    <input type="text" [(ngModel)]="invoice.customer_name" name="customer_name" required />
+</div>
+<div>
+    <label>Invoice Number:</label>
+    <input type="text" [(ngModel)]="invoice.number" name="number" required />
+</div>
+<div class="action">
+    <button type="submit">Create</button>
+    <button type="button" (click)="goBack()">Cancel</button>
+</div>
+</form>

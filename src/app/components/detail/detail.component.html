@@ -1,7 +1,18 @@
 <h2>Invoice Details</h2>
-<div *ngIf="invoice">
-  <p><strong>ID:</strong> {{ invoice.id }}</p>
-  <p><strong>Name:</strong> {{ invoice.customer_name }}</p>
-  <p><strong>Invoice ID:</strong> {{ invoice.number }}</p>
+<div class="border" *ngIf="invoice">
+  <div>
+    <label>ID:</label> {{ invoice.id }} <br>
+  </div>
+  <div>
+    <label>Customer Name:</label>
+    <input type="text" [(ngModel)]="invoice.customer_name"> <br>
+  </div>
+  <div>
+    <label>Invoice ID:</label>
+    <input type="text" [(ngModel)]="invoice.number"> <br>
+  </div>
+  <div class="action">
+    <button type="submit" (click)="updateInvoice()">Save</button>
+    <button type="button" (click)="goBack()">Back</button>
+  </div>
 </div>
-<button (click)="goBack()">Back</button>
